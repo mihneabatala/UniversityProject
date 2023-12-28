@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Montserrat:wght@300;400;500;600&family=Nanum+Gothic&display=swap');
 :root{
-  --brown: #CA907E;
-  --vanilla: #DBD8AE;
-  --carmine:#8C0114;
+  --brown: black;
+  --vanilla: white;
+  --carmine:black;
 
   --xxs: 0.5rem;
   --xs:0.7rem;
@@ -24,6 +24,7 @@
 html{
   font-size: 20px;
   font-family: 'Montserrat','sans-serif';
+  
 }
 
 #root{
@@ -79,7 +80,7 @@ li:hover a{
 
 .addForm{
   width: 400px;
-  
+  height: 300px;
   background-color: var(--carmine);
   display: flex;
   flex-direction: column;
@@ -123,5 +124,59 @@ input{
   
 }
 .formSubmit:hover {
-  background-color: var(--brown);
+  background-color: green;
+}
+
+.newspaper_component{
+  display: flex;
+  height: 700px;
+}
+
+.table{
+  width: 1000px;
+  height: 500px;
+  background-color: var(--carmine);
+  color: var(--vanilla);
+  margin-left: 5rem;
+  border-radius: 20px;
+  overflow-x: auto;
+  padding: 10px;
+}
+.table_title{
+  color: var(--vanilla);
+  text-align: center;
+}
+
+table{
+  width: 100%;
+  margin-top: 1rem;
+  font-size: var(--s);
+}
+
+thead{
+  text-align: center;
+}
+
+tr{
+  background-color: rgb(94, 49, 49);
+  
+}
+td{
+  text-indent: 3px;
+
+}
+.Button{
+  width: 4rem;
+  border-radius: 1rem;
+  border: none;
+  font-size: var(--n);
+  cursor: pointer;
+}
+.Button:hover{
+  background-color: grey !important;
+}
+
+.button_cell{
+  display: flex;
+  justify-content: space-evenly;
 }

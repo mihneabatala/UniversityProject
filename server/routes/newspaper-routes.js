@@ -1,5 +1,5 @@
 import express from 'express';
-import { deleteNewspaper, getAllNewspapers, getNewspaperId, insertNewspaper, stringCorect, updateNewspaper } from '../services/newspaper-service.js';
+import { deleteNewspaper, getAllNewspapers, getNewspaperData, getNewspaperId, insertNewspaper, stringCorect, updateNewspaper } from '../services/newspaper-service.js';
 
 const router = express.Router();
 
@@ -39,9 +39,10 @@ router.post('/', async (req,res,next) =>{
     const newName = stringCorect(name);
     const newCategory = stringCorect(category);
         await insertNewspaper(newName,newCategory);
-        return res.status(200).json({message: "Newspaper created successfully!"});
+        const newspaper = await getNewspaperData(newName);
+        return res.status(200).json(newspaper);
     }
-    catch(err){
+    catch(err){ 
         next(err);
     }
 })

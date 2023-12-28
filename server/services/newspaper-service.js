@@ -5,9 +5,28 @@ export const getAllNewspapers = async () =>{
 
     try {
         const [newspapers] = await db.query(query);
+
+        for(let i =0; i < newspapers.length;i++){
+            const date = newspapers[i].publication_date.toLocaleDateString();
+            newspapers[i].publication_date = date;
+        }
         return newspapers;
     }
     catch (err) {
+        console.error(err); 
+        throw new Error("Database error!");
+    }
+}
+
+export const getNewspaperData = async (name) => {
+    const query = "SELECT * FROM newspaper as n WHERE n.name = ?;"
+
+    try{
+        const [newspaper] = await db.query(query,[name]);
+        newspaper[0].publication_date = newspaper[0].publication_date.toLocaleDateString();
+        return newspaper;
+    } catch (err){
+        console.error(err.message);
         throw new Error("Database error!");
     }
 }
@@ -18,7 +37,7 @@ export const getNewspaperId = async (name) =>{
     try{
         const [id] = await db.query(query,[name]);
         return id;
-    }
+    } 
     catch (err) {
         console.error(err.message);
         throw new Error("Database error!");

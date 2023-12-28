@@ -1,5 +1,5 @@
 import React from 'react'
-import Addform from './Addform'
+import Addform from './Addnewspaper'
 import Table from './Table'
 
 const Subscription = () => {
@@ -10,11 +10,11 @@ const Subscription = () => {
 
   return (
     <>
-    <h1 className='componentInfo'>This is the Subscription Component</h1>
+    <h1 className='componentInfo'>Buy Subscription</h1>
       <Addform
-        numberOfInputs={2}
-        labelNames={['Type:', 'Price:']}
-        onsubmit={handleFormSubmit}
+        numberOfInputs={4}
+        labelNames={['Subscriber Email:','Newspaper:','Type:', 'Price:']}
+        onSubmit={handleFormSubmit}
       />
       <Table/>
     </>
