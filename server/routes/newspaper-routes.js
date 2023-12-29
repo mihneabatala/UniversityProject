@@ -49,7 +49,7 @@ router.post('/', async (req,res,next) =>{
     }
 })
 
-router.patch('/', async(req,res,next)=>{
+router.patch('/:id', async(req,res,next)=>{
     let {name,newName,newCategory} =req.body;
 
     try{

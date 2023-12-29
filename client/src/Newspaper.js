@@ -6,6 +6,9 @@ const Newspaper = () => {
   const [items,setItems] = useState([]);
   const [input1, setInput1] = useState('');
   const [input2, setInput2] = useState('');
+  const [input3, setInput3] = useState('');
+  const [input4, setInput4] = useState('');
+  const [editing, setEditing] = useState(false);
 
   useEffect(() => {
     const fetchItems = async() => {
@@ -19,7 +22,17 @@ const Newspaper = () => {
     }
     fetchItems(); 
   },[])
-  
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const item = {
+      name: input1,
+      category: input2
+    }
+    addItem(item);
+    setInput1('');
+    setInput2('');
+  }
 
   const addItem = async (item) => {
     try{
@@ -31,10 +44,6 @@ const Newspaper = () => {
     } catch(err){
       alert(err.response.data.message);
     }
-  }
-
-  const handleEdit = () =>{
-
   }
 
   const handleDelete = async (id) => {
@@ -52,16 +61,26 @@ const Newspaper = () => {
     
   }
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const item = {
-      name: input1,
-      category: input2
-    }
-    addItem(item);
-    setInput1('');
-    setInput2('');
+  const handleEdit = (id) => {
+    setEditing(id);
   }
+
+
+  const handleSave = () =>{
+    
+    const editItem = {
+      name: input3,
+      category: input4
+    }
+  }
+
+  const handleCancel = (e) =>{
+    setEditing(false);
+  }
+
+  
+
+  
   return (
     <>
     <h1 className='componentInfo'>Add Newspaper</h1>
@@ -75,8 +94,15 @@ const Newspaper = () => {
       />
       <Table
         items={items}
+        input3={input3}
+        input4={input4}
+        setInput3={setInput3}
+        setInput4={setInput4}
+        editing={editing}
         handleEdit={handleEdit}
         handleDelete={handleDelete}
+        handleSave={handleSave}
+        handleCancel={handleCancel}
       />
       </div>
     </>
