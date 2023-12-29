@@ -3,7 +3,6 @@ import Addnewspaper from './Addnewspaper'
 import Table from './Table'
 import axios from './api/axios.js'
 const Newspaper = () => {
-  const API_URL = "http://localhost:5000/newspaper";
   const [items,setItems] = useState([]);
   const [input1, setInput1] = useState('');
   const [input2, setInput2] = useState('');
@@ -11,15 +10,13 @@ const Newspaper = () => {
   useEffect(() => {
     const fetchItems = async() => {
       try{
-        const response = await fetch(API_URL);
-        if(!response.ok) throw new Error('Did not receive expected data!')
-        const listItems = await response.json();
+        const response= await axios.get('/newspaper');
+        const listItems = await response.data;
         setItems(listItems);
       }catch(err){
         alert(err.message);
       }
     }
-
     fetchItems(); 
   },[])
   
@@ -29,11 +26,10 @@ const Newspaper = () => {
       const response = await axios.post('/newspaper',item);
       const newItem= response.data[0];
       const listItems = [...items,newItem];
-      
       setItems(listItems);
 
     } catch(err){
-      alert(err.message);
+      alert(err.response.data.message);
     }
   }
 
@@ -41,8 +37,19 @@ const Newspaper = () => {
 
   }
 
-  const handleDelete = () => {
-
+  const handleDelete = async (id) => {
+    try{
+      const response = await axios.delete('/newspaper/' + id);
+      const listItems = items.filter( (item) => {
+        return item.id !== id;
+      })
+      setItems(listItems);
+      alert(response.data.name + " was deleted! ")
+    }catch(err) {
+      console.log(err.message);
+      alert(err.message);
+    }
+    
   }
 
   const handleFormSubmit = (e) => {

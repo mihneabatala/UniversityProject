@@ -156,14 +156,15 @@ table{
 thead{
   text-align: center;
 }
-
+th{
+  padding: 0.2rem 0;
+}
 tr{
   background-color: rgb(94, 49, 49);
-  
 }
 td{
   text-indent: 3px;
-
+  padding: 0.2rem 0;
 }
 .Button{
   width: 4rem;

@@ -30,8 +30,8 @@ router.post('/', async (req,res,next)=>{
     }
 })
 
-router.delete('/', async(req,res,next)=>{
-    const {name,email} = req.body;
+router.delete('/:id', async(req,res,next)=>{
+    const {id} = req.params;
     try{
         const emailCounter = await emailExistence(email);
         if(emailCounter[0].emailCounter==0){

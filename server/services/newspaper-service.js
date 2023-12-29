@@ -11,8 +11,7 @@ export const getAllNewspapers = async () =>{
             newspapers[i].publication_date = date;
         }
         return newspapers;
-    }
-    catch (err) {
+    }catch (err) {
         console.error(err); 
         throw new Error("Database error!");
     }
@@ -25,32 +24,42 @@ export const getNewspaperData = async (name) => {
         const [newspaper] = await db.query(query,[name]);
         newspaper[0].publication_date = newspaper[0].publication_date.toLocaleDateString();
         return newspaper;
-    } catch (err){
+    }catch (err){
         console.error(err.message);
         throw new Error("Database error!");
     }
 }
 
-export const getNewspaperId = async (name) =>{
-    const query = "SELECT n.id FROM newspaper as n WHERE n.name = ?;"
+export const checkNewspaperName = async (name) => {
+    const query ="SELECT * FROM newspaper as n WHERE n.name = ?;"
 
     try{
-        const [id] = await db.query(query,[name]);
-        return id;
-    } 
-    catch (err) {
+        const [newspaper] = await db.query(query,[name]);
+        return newspaper;
+    }catch(err){
         console.error(err.message);
         throw new Error("Database error!");
     }
 }
 
-export const deleteNewspaper = async (name) =>{
-    const query = "DELETE from newspaper as n WHERE n.name = ?;";
+export const checkNewspaperId = async (id) =>{
+    const query = "SELECT * FROM newspaper as n WHERE n.id = ?;"
 
     try{
-        await db.query(query,[name]);
+        const item = await db.query(query,[id]);
+        return item[0];
+    }catch (err) {
+        console.error(err.message);
+        throw new Error("Database error!");
     }
-    catch(err){
+}
+
+export const deleteNewspaper = async (id) =>{
+    const query = "DELETE from newspaper as n WHERE n.id = ?;";
+
+    try{
+        await db.query(query,[id]);
+    }catch(err){
         console.error(err.message);
         throw new Error("Database error!");
     }
@@ -79,8 +88,7 @@ export const updateNewspaper = async(newName,newCategory,id)=>{
 
     try{
         await db.query(query,[newName,newCategory,id])
-    }
-    catch(err){
+    }catch(err){
         console.error(err.message);
         throw new Error("Database error!");
     }
