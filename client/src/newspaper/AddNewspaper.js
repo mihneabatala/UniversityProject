@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Addnewspaper = ({ input1, input2, setInput1, setInput2, handleFormSubmit }) => {
+const AddNewspaper = ({ input1, input2, setInput1, setInput2, handleFormSubmit }) => {
 
   return (
     <form className = 'addForm' onSubmit={handleFormSubmit}>
-       <div key={0} className='input_label'>
+       <div key={0} className='inputLabel'>
         <label htmlFor='newspaper_name'>Name:</label>
         <input 
           type="text"
@@ -16,7 +16,7 @@ const Addnewspaper = ({ input1, input2, setInput1, setInput2, handleFormSubmit }
           onChange={(e) => setInput1(e.target.value)}
         />
       </div>
-      <div key={1} className='input_label'>
+      <div key={1} className='inputLabel'>
         <label htmlFor='newspaper_category'>Category:</label>
         <input 
           type="text"
@@ -33,4 +33,4 @@ const Addnewspaper = ({ input1, input2, setInput1, setInput2, handleFormSubmit }
   )
 }
 
-export default Addnewspaper
+export default AddNewspaper

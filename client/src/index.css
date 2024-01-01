@@ -98,7 +98,7 @@ label{
   font-size: var(--m);
 }
 
-.input_label{
+.inputLabel{
   display: flex;
   flex-direction: column;
 }
@@ -138,7 +138,7 @@ input{
   background-color: var(--color4);
 }
 
-.newspaper_component{
+.newspaperComponent{
   display: flex;
   height: 700px;
 }
@@ -188,7 +188,7 @@ td{
   background-color: var(--color1) !important;
 }
 
-.button_cell{
+.buttonCell{
   display: flex;
   justify-content: space-evenly;
   align-items: center;

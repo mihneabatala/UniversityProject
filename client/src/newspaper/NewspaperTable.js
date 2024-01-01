@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Table = ({ items, handleEdit, handleDelete ,input3, input4, setInput3, setInput4, editing , handleUpdate, handleCancel }) => {
+const NewspaperTable = ({ items, handleEdit, handleDelete ,input3, input4, setInput3, setInput4, editing , handleUpdate, handleCancel }) => {
   return (
     <div className='table'>
       <h2 className='table_title'>Newspaper Table</h2>
@@ -42,7 +42,7 @@ const Table = ({ items, handleEdit, handleDelete ,input3, input4, setInput3, set
                     />
                   </td>
                   <td>{item.publication_date}</td>
-                  <td className='button_cell'>
+                  <td className='buttonCell'>
                     <button className='Button' style={{backgroundColor:"#95A78D"}} onClick={() => handleUpdate(item.id)}>Save</button> 
                     <button className='Button' style={{backgroundColor:"#F87666"}} onClick={() => handleCancel(item.id)}>Cancel</button>
                   </td>
@@ -52,7 +52,7 @@ const Table = ({ items, handleEdit, handleDelete ,input3, input4, setInput3, set
                   <td>{item.name}</td>
                   <td>{item.category}</td>
                   <td>{item.publication_date}</td>
-                  <td className='button_cell'>
+                  <td className='buttonCell'>
                     <button
                       style={{ backgroundColor: '#BD897E' }}
                       className='Button'
@@ -80,4 +80,4 @@ const Table = ({ items, handleEdit, handleDelete ,input3, input4, setInput3, set
   );
 };
 
-export default Table;
+export default NewspaperTable;

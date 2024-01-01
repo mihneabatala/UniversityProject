@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import Addnewspaper from './Addnewspaper'
-import Table from './Table'
-import axios from './api/axios.js'
+import NewspaperTable from './NewspaperTable.js'
+import AddNewspaper from './AddNewspaper.js'
+import axios from '../api/axios.js'
 const Newspaper = () => {
   const [items,setItems] = useState([]);
   const [input1, setInput1] = useState('');
@@ -108,15 +108,15 @@ const Newspaper = () => {
   return (
     <>
     <h1 className='componentInfo'>Add Newspaper</h1>
-    <div className='newspaper_component'>
-      <Addnewspaper
+    <div className='newspaperComponent'>
+      <AddNewspaper
        input1={input1}
        input2={input2}
        setInput1={setInput1}
        setInput2={setInput2}
        handleFormSubmit={handleFormSubmit}
       />
-      <Table
+      <NewspaperTable
         items={items}
         input3={input3}
         input4={input4}

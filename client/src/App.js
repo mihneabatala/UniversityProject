@@ -1,15 +1,12 @@
 import React from 'react'
-import Homepage from './Homepage'
-import Newspaper from './Newspaper'
-import Subscriber from './Subscriber'
-import Subscription from './Subscription'
+import Homepage from './home/Homepage'
+import Newspaper from './newspaper/Newspaper'
+import Subscriber from './subscriber/Subscriber'
+import Subscription from './subscription/Subscription'
 import Navbar from './Navbar'
 import {  Routes,Route} from 'react-router-dom'
 const App = () => {
   
-  
-
-
   return (
     <>
       
