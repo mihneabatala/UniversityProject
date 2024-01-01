@@ -1,5 +1,5 @@
 import express from 'express';
-import { deleteNewspaper, getAllNewspapers, getNewspaperData, checkNewspaperId, insertNewspaper, stringCorect, updateNewspaper, checkNewspaperName } from '../services/newspaper-service.js';
+import { deleteNewspaper, getAllNewspapers, getNewspaperData, checkNewspaperId, insertNewspaper, updateNewspaper, checkNewspaperName } from '../services/newspaper-service.js';
 
 const router = express.Router();
 
@@ -29,18 +29,15 @@ router.delete('/:id', async (req,res,next) =>{
 })
 
 router.post('/', async (req,res,next) =>{
-    const {name,category} =req.body;
+    let {name,category} = req.body;
 
     try{
         const checkName = await checkNewspaperName(name);
         if(checkName.length != 0){
             return res.status(400).json({message: "Name already exists! Please write a new name!"})
         }
-        const newName = stringCorect(name);
-        const newCategory = stringCorect(category);
-
-        await insertNewspaper(newName,newCategory);
-        const newspaper = await getNewspaperData(newName);
+        await insertNewspaper(name,category);
+        const newspaper = await getNewspaperData(name);
     
         return res.status(200).json(newspaper);
     }
@@ -50,18 +47,12 @@ router.post('/', async (req,res,next) =>{
 })
 
 router.patch('/:id', async(req,res,next)=>{
-    let {name,newName,newCategory} =req.body;
-
+    let {name,category} =req.body;
+    const {id} = req.params;
     try{
-        const id = await getNewspaperId(name);
-        if(id.length == 0){
-            return res.status(400).json({message: "Newspaper doesn't exist!"});
-        }
-        const newspaperId= id[0].id;
-        newName = stringCorect(newName);
-        newCategory = stringCorect(newCategory);
-        await updateNewspaper(newName,newCategory,newspaperId);
-        return res.status(200).json({message: "Newspaper updated successfully"});
+        await updateNewspaper(name,category,id);
+        const editedNewspaper = await getNewspaperData(name);
+        return res.status(200).json(editedNewspaper);
     }
     catch(err){
         next(err);

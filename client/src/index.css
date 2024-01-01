@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Montserrat:wght@300;400;500;600&family=Nanum+Gothic&display=swap');
 :root{
-  --brown: black;
-  --vanilla: white;
-  --carmine:black;
+  --color1: #D7D0C8;
+  --color2: #C8C6AF;
+  --color3:#95A78D;
+  --color4:#BD897E;
+  --color5:#F87666;
+  
 
   --xxs: 0.5rem;
   --xs:0.7rem;
@@ -24,12 +27,11 @@
 html{
   font-size: 20px;
   font-family: 'Montserrat','sans-serif';
-  
 }
 
 #root{
   height: 100vh;
-  background-color: var(--vanilla);
+  background-color: var(--color1);
 }
 
 .title{
@@ -40,21 +42,21 @@ html{
 
 .title a{
   font-size: var(--xxl);
-  color: var(--carmine);
+  color: var(--color3);
   margin-bottom: 1rem;
   text-decoration: none;
 }
 
 hr{
   border: none;
-  border-bottom: 2px solid var(--carmine);
+  border-bottom: 2px solid var(--color4);
 }
 
 .navbar{
   height: 70px;
   font-size: var(--m);
   font-weight: 600;
-  color: #CA907E;
+  color: var(--color4);
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -67,21 +69,21 @@ li a {
 }
 
 li:hover a{
-  color: var(--brown);
+  color: var(--color5);
 }
 
 .componentInfo{
   margin-top: 2rem;
   margin-left: 5rem;
   font-size: var(--m);
-  color: var(--brown);
+  color: black;
 
 }
 
 .addForm{
   width: 400px;
   height: 300px;
-  background-color: var(--carmine);
+  background-color: var(--color3);
   display: flex;
   flex-direction: column;
   margin-top: 3rem;
@@ -90,7 +92,7 @@ li:hover a{
 }
 
 label{
-  color: var(--vanilla);
+  color: black;
   margin: 0.5rem 2rem;
   margin-top: 1.3rem;
   font-size: var(--m);
@@ -110,6 +112,15 @@ input{
   text-indent: 5px;
 }
 
+.editInput{
+  width: 70%;
+  height: 1.2rem;
+  margin-left: 1rem;
+  border-radius: 10px;
+  border: none;
+  text-indent: 5px;
+}
+
 .formSubmit{
   width: 50%;
   height: 1.5rem;
@@ -117,14 +128,14 @@ input{
   margin-top:2rem;
   border-radius: 0.5rem;
   border: none;
-  background-color: var(--vanilla);
+  background-color: var(--color5);
   font-weight: 600;
   font-size: var(--s);
   cursor: pointer;
   
 }
 .formSubmit:hover {
-  background-color: green;
+  background-color: var(--color4);
 }
 
 .newspaper_component{
@@ -135,7 +146,7 @@ input{
 .table{
   width: 1000px;
   height: 500px;
-  background-color: var(--carmine);
+  background-color: var(--color3);
   color: var(--vanilla);
   margin-left: 5rem;
   border-radius: 20px;
@@ -143,7 +154,7 @@ input{
   padding: 10px;
 }
 .table_title{
-  color: var(--vanilla);
+  color: var(--color1);
   text-align: center;
 }
 
@@ -160,7 +171,7 @@ th{
   padding: 0.2rem 0;
 }
 tr{
-  background-color: rgb(94, 49, 49);
+  background-color: var(--color2);
 }
 td{
   text-indent: 3px;
@@ -174,10 +185,11 @@ td{
   cursor: pointer;
 }
 .Button:hover{
-  background-color: grey !important;
+  background-color: var(--color1) !important;
 }
 
 .button_cell{
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 }

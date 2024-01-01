@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Table = ({ items, handleEdit, handleDelete ,input3, input4, setInput3, setInput4, editing , handleSave, handleCancel }) => {
+const Table = ({ items, handleEdit, handleDelete ,input3, input4, setInput3, setInput4, editing , handleUpdate, handleCancel }) => {
   return (
     <div className='table'>
       <h2 className='table_title'>Newspaper Table</h2>
@@ -24,6 +24,7 @@ const Table = ({ items, handleEdit, handleDelete ,input3, input4, setInput3, set
                     <input
                       type='text'
                       className='editInput'
+                      id='newName'
                       placeholder={item.name}
                       value={input3}
                       onChange={(e) => setInput3(e.target.value)}
@@ -34,15 +35,16 @@ const Table = ({ items, handleEdit, handleDelete ,input3, input4, setInput3, set
                     <input
                       type='text'
                       className='editInput'
-                      placeholder={item.name}
+                      id='newCategory'
+                      placeholder={item.category}
                       value={input4}
                       onChange={(e) => setInput4(e.target.value)}
                     />
                   </td>
                   <td>{item.publication_date}</td>
-                  <td>
-                    <button className='Button' style={{backgroundColor:"green"}} onClick={() => handleSave(item.id)}>Save</button>
-                    <button className='Button' style={{backgroundColor:"lightblue"}} onClick={() => handleCancel(item.id)}>Cancel</button>
+                  <td className='button_cell'>
+                    <button className='Button' style={{backgroundColor:"#95A78D"}} onClick={() => handleUpdate(item.id)}>Save</button> 
+                    <button className='Button' style={{backgroundColor:"#F87666"}} onClick={() => handleCancel(item.id)}>Cancel</button>
                   </td>
                 </tr>
                   ) : (
@@ -52,14 +54,14 @@ const Table = ({ items, handleEdit, handleDelete ,input3, input4, setInput3, set
                   <td>{item.publication_date}</td>
                   <td className='button_cell'>
                     <button
-                      style={{ backgroundColor: 'yellow' }}
+                      style={{ backgroundColor: '#BD897E' }}
                       className='Button'
                       onClick={() => handleEdit(item.id)}
                     >
                       Edit
                     </button>
                     <button
-                      style={{ backgroundColor: 'red' }}
+                      style={{ backgroundColor: '#F87666' }}
                       className='Button'
                       onClick={() => handleDelete(item.id)}
                     >
@@ -72,19 +74,6 @@ const Table = ({ items, handleEdit, handleDelete ,input3, input4, setInput3, set
               </React.Fragment>
             ))
           }
-
-
-          {/* {items.map((item) => (
-            <tr key={item.id}>
-              <td>{item.name}</td>
-              <td>{item.category}</td>
-              <td>{item.publication_date}</td>
-              <td className='button_cell'>
-                <button style={{backgroundColor: 'yellow'}} className='Button' onClick={() => handleEdit(item.id)}>Edit</button>
-                <button style={{backgroundColor: 'red'}} className='Button' onClick={() => handleDelete(item.id)}>Delete</button>
-              </td>
-            </tr>
-          ))} */}
         </tbody>
       </table>
     </div>

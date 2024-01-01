@@ -63,23 +63,47 @@ const Newspaper = () => {
 
   const handleEdit = (id) => {
     setEditing(id);
+    
   }
 
-
-  const handleSave = () =>{
-    
-    const editItem = {
+  const handleUpdate = (id) =>{
+    const editedItem = {
       name: input3,
       category: input4
     }
+    updateItem(editedItem,id);
+    setInput3('');
+    setInput4('');
+    setEditing(false);
+  }
+
+  const updateItem = async (newspaper,id) =>{
+    try{
+      const response = await axios.patch('/newspaper/'+ id, newspaper);
+      const updatedList = items.map( item => {
+        if(item.id === response.data[0].id){
+         return {
+          id: item.id,name: response.data[0].name,
+          publication_date:response.data[0].publication_date,
+          category: response.data[0].category
+        }
+        }
+        return item;
+    })
+
+    setItems(updatedList);
+    alert('Newspaper updated successfully!')
+
+    }catch(err){
+      console.log(err.message);
+      alert(err.message);
+    }
+    
   }
 
   const handleCancel = (e) =>{
     setEditing(false);
   }
-
-  
-
   
   return (
     <>
@@ -101,7 +125,7 @@ const Newspaper = () => {
         editing={editing}
         handleEdit={handleEdit}
         handleDelete={handleDelete}
-        handleSave={handleSave}
+        handleUpdate={handleUpdate}
         handleCancel={handleCancel}
       />
       </div>

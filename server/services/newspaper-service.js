@@ -77,11 +77,7 @@ export const insertNewspaper = async (name,category) =>{
     }
 }
 
-export const stringCorect = (string)=>{
-    let newString = string.toLowerCase();
-    newString = newString[0].toUpperCase() + newString.slice(1);
-    return newString;
-}
+
 
 export const updateNewspaper = async(newName,newCategory,id)=>{
     const query = "UPDATE newspaper as n SET n.name =?, n.category =? WHERE n.id = ? ;";

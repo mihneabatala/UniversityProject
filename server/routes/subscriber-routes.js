@@ -1,6 +1,5 @@
 import express from 'express';
-import {deleteSubscriber, emailExistence, getAllSubscribers, getSubscriberId, insertSubscriber, updateSubscriber}from '../services/subscriber-services.js'
-import { stringCorect } from '../services/newspaper-service.js';
+import {deleteSubscriber, emailExistence, getAllSubscribers, getSubscriberId, insertSubscriber, updateSubscriber} from '../services/subscriber-services.js'
 const router = express.Router();    
 
 router.get('/', async (req,res,next)=>{
@@ -20,9 +19,9 @@ router.post('/', async (req,res,next)=>{
             return res.status(400).json({ error: "Email already in use!"});
         }  
 
-    const newCity = stringCorect(city);
+    
 
-        await insertSubscriber(name,email,newCity);
+        await insertSubscriber(name,email,city);
         return res.status(200).json({ message: "Subscriber successfully added!" })
 
     } catch(error) {
@@ -57,9 +56,9 @@ router.patch('/', async(req, res,next)=>{
     let subscriberId;
     subscriberId = await getSubscriberId(email);
 
-    const newCity = stringCorect(city)
+    
 
-    await updateSubscriber(name,updatedEmail,newCity,subscriberId);
+    await updateSubscriber(name,updatedEmail,city,subscriberId);
     return res.status(200).json({message: "Subscriber updated successfully!" })
     
     }catch (error) {
