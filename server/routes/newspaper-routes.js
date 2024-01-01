@@ -1,5 +1,5 @@
 import express from 'express';
-import { deleteNewspaper, getAllNewspapers, getNewspaperData, checkNewspaperId, insertNewspaper, updateNewspaper, checkNewspaperName } from '../services/newspaper-service.js';
+import { deleteNewspaper, getAllNewspapers, getNewspaperData, getNewspaperById, insertNewspaper, updateNewspaper, checkNewspaperName } from '../services/newspaper-service.js';
 
 const router = express.Router();
 
@@ -12,24 +12,8 @@ router.get('/', async (req,res,next) =>{
     }
 })
 
-router.delete('/:id', async (req,res,next) =>{
-    const {id} = req.params;
-
-    try{
-        const check = await checkNewspaperId(id);
-        if(check.length == 0){
-            return res.status(400).json({message: "Newspaper doesn't exist!"});
-        } else{
-            await deleteNewspaper(id);
-            return res.status(200).json(check[0]);
-        }
-    } catch(err){
-        next(err);
-    }
-})
-
 router.post('/', async (req,res,next) =>{
-    let {name,category} = req.body;
+    const {name,category} = req.body;
 
     try{
         const checkName = await checkNewspaperName(name);
@@ -46,8 +30,20 @@ router.post('/', async (req,res,next) =>{
     }
 })
 
+router.delete('/:id', async (req,res,next) =>{
+    const {id} = req.params;
+
+    try{
+        const newspaper = await getNewspaperById(id);
+        await deleteNewspaper(id);
+        return res.status(200).json(newspaper);
+    } catch(err){
+        next(err);
+    }
+})
+
 router.patch('/:id', async(req,res,next)=>{
-    let {name,category} =req.body;
+    const {name,category} =req.body;
     const {id} = req.params;
     try{
         await updateNewspaper(name,category,id);

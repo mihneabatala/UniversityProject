@@ -23,7 +23,7 @@ export const getNewspaperData = async (name) => {
     try{
         const [newspaper] = await db.query(query,[name]);
         newspaper[0].publication_date = newspaper[0].publication_date.toLocaleDateString();
-        return newspaper;
+        return newspaper[0];
     }catch (err){
         console.error(err.message);
         throw new Error("Database error!");
@@ -42,12 +42,12 @@ export const checkNewspaperName = async (name) => {
     }
 }
 
-export const checkNewspaperId = async (id) =>{
+export const getNewspaperById = async (id) =>{
     const query = "SELECT * FROM newspaper as n WHERE n.id = ?;"
 
     try{
-        const item = await db.query(query,[id]);
-        return item[0];
+        const newspaper = await db.query(query,[id]);
+        return newspaper[0];
     }catch (err) {
         console.error(err.message);
         throw new Error("Database error!");
@@ -76,8 +76,6 @@ export const insertNewspaper = async (name,category) =>{
         throw new Error("Database error!");
     }
 }
-
-
 
 export const updateNewspaper = async(newName,newCategory,id)=>{
     const query = "UPDATE newspaper as n SET n.name =?, n.category =? WHERE n.id = ? ;";

@@ -91,6 +91,10 @@ li:hover a{
   border-radius: 1rem;
 }
 
+.biggerForm{
+  height: 400px;
+}
+
 label{
   color: black;
   margin: 0.5rem 2rem;
@@ -153,7 +157,7 @@ input{
   overflow-x: auto;
   padding: 10px;
 }
-.table_title{
+.tableTitle{
   color: var(--color1);
   text-align: center;
 }

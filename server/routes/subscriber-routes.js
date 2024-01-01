@@ -1,5 +1,5 @@
 import express from 'express';
-import {deleteSubscriber, emailExistence, getAllSubscribers, getSubscriberId, insertSubscriber, updateSubscriber} from '../services/subscriber-services.js'
+import {deleteSubscriber, emailExistence, getAllSubscribers, getSubscriberData, getSubscriberById, insertSubscriber, updateSubscriber} from '../services/subscriber-services.js'
 const router = express.Router();    
 
 router.get('/', async (req,res,next)=>{
@@ -15,14 +15,12 @@ router.post('/', async (req,res,next)=>{
     const {name, email, city} = req.body;
     try{
         const emailCounter = await emailExistence(email);
-        if(emailCounter[0].emailCounter!=0){
-            return res.status(400).json({ error: "Email already in use!"});
+        if(emailCounter.emailCounter!=0){
+            return res.status(400).json({ message: "Email already registered!"});
         }  
-
-    
-
         await insertSubscriber(name,email,city);
-        return res.status(200).json({ message: "Subscriber successfully added!" })
+        const subscriber = await getSubscriberData(email);
+        return res.status(200).json(subscriber);
 
     } catch(error) {
         next(error);
@@ -32,35 +30,23 @@ router.post('/', async (req,res,next)=>{
 router.delete('/:id', async(req,res,next)=>{
     const {id} = req.params;
     try{
-        const emailCounter = await emailExistence(email);
-        if(emailCounter[0].emailCounter==0){
-            return res.status(400).json({ error: "Subscriber doesn't exist!"});
-        }
-        await deleteSubscriber(name,email);
-        return res.status(200).json({ message: "Subscriber deleted successfully!" });
+        const subscriber = await getSubscriberById(id);
+        await deleteSubscriber(id);
+        return res.status(200).json(subscriber);
     }
     catch (error) {
         next(error);
     }
 })
 
-router.patch('/', async(req, res,next)=>{
-    const {name,email,updatedEmail,city} = req.body;
+router.patch('/:id', async(req, res,next)=>{
+    const {name,email,city} = req.body;
+    const {id} = req.params;
     
     try{
-        const emailCounter = await emailExistence(email);
-        if(emailCounter[0].emailCounter==0){
-            return res.status(400).json({ error: "Subscriber doesn't exist!"});
-        }
-    
-    let subscriberId;
-    subscriberId = await getSubscriberId(email);
-
-    
-
-    await updateSubscriber(name,updatedEmail,city,subscriberId);
-    return res.status(200).json({message: "Subscriber updated successfully!" })
-    
+        await updateSubscriber(name,email,city,id);
+        const editedSubscriber = await getSubscriberById(id);
+        return res.status(200).json(editedSubscriber);
     }catch (error) {
         next(error);
     }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import NewspaperTable from './NewspaperTable.js'
-import AddNewspaper from './AddNewspaper.js'
 import axios from '../api/axios.js'
+import AddNewspaperForm from './AddNewspaperForm.js'
 const Newspaper = () => {
   const [items,setItems] = useState([]);
   const [input1, setInput1] = useState('');
@@ -37,7 +37,7 @@ const Newspaper = () => {
   const addItem = async (item) => {
     try{
       const response = await axios.post('/newspaper',item);
-      const newItem= response.data[0];
+      const newItem= response.data;
       const listItems = [...items,newItem];
       setItems(listItems);
 
@@ -53,7 +53,8 @@ const Newspaper = () => {
         return item.id !== id;
       })
       setItems(listItems);
-      alert(response.data.name + " was deleted! ")
+      
+      alert(response.data[0].name + " was deleted! ")
     }catch(err) {
       console.log(err.message);
       alert(err.message);
@@ -61,31 +62,40 @@ const Newspaper = () => {
     
   }
 
-  const handleEdit = (id) => {
+  const handleEdit = (id,name,category) => {
     setEditing(id);
-    
+    setInput3(name);
+    setInput4(category);
   }
 
   const handleUpdate = (id) =>{
-    const editedItem = {
-      name: input3,
-      category: input4
+    if(input3 !=='' && input4 !==''){
+      const editedItem = {
+        name: input3,
+        category: input4
+      }
+      updateItem(editedItem,id);
+      setInput3('');
+      setInput4('');
+      setEditing(false);
+    }else{
+      setEditing(false);
+      setInput3('');
+      setInput4('');
+      alert("Please fill all input fields!")
     }
-    updateItem(editedItem,id);
-    setInput3('');
-    setInput4('');
-    setEditing(false);
   }
 
   const updateItem = async (newspaper,id) =>{
     try{
       const response = await axios.patch('/newspaper/'+ id, newspaper);
       const updatedList = items.map( item => {
-        if(item.id === response.data[0].id){
+        if(item.id === response.data.id){
          return {
-          id: item.id,name: response.data[0].name,
-          publication_date:response.data[0].publication_date,
-          category: response.data[0].category
+          id: response.data.id,
+          name: response.data.name,
+          publication_date:response.data.publication_date,
+          category: response.data.category
         }
         }
         return item;
@@ -109,7 +119,7 @@ const Newspaper = () => {
     <>
     <h1 className='componentInfo'>Add Newspaper</h1>
     <div className='newspaperComponent'>
-      <AddNewspaper
+      <AddNewspaperForm
        input1={input1}
        input2={input2}
        setInput1={setInput1}

@@ -12,13 +12,24 @@ export const getAllSubscribers = async() =>{
     }
 }
 
+export const getSubscriberData = async(email) =>{
+    const query = "SELECT * from subscriber as s WHERE s.email = ?; "
+
+    try{
+        const [subscriber] = await db.query(query,[email]);
+        return subscriber[0]
+    }catch(err){
+        console.error(err.message);
+        throw new Error("Database error!");
+    }
+}
+
 export const emailExistence = async(email) =>{
     const query = "SELECT COUNT(*) as emailCounter from subscriber as s WHERE s.email=?;";
 
     try{
         const [emailCounter] = await db.query(query,[email]);
-
-        return emailCounter;
+        return emailCounter[0];
     }catch (err){
         console.error(err.message);
         throw new Error("Database error!");
@@ -36,19 +47,19 @@ export const insertSubscriber = async (name, email, city) =>{
     }
 }
 
-export const deleteSubscriber = async (name,email) =>{
-    const query = "DELETE FROM subscriber WHERE name = ? AND email = ?;"
+export const deleteSubscriber = async (id) =>{
+    const query = "DELETE FROM subscriber WHERE id = ?;"
 
     try{
-        await db.query(query,[name, email]);
+        await db.query(query,[id]);
     }catch(err){
         console.error(err.message);
         throw new Error("Database error!");
     }
 }
 
-export const updateSubscriber = async (name, email, city,id) =>{
-    const query ="UPDATE subscriber as s SET s.name=?,s.email=?,s.city=? WHERE s.id=?;"
+export const updateSubscriber = async (name, email, city, id) =>{
+    const query ="UPDATE subscriber as s SET s.name=?, s.email=?, s.city=? WHERE s.id=?;"
     try{
         await db.query(query,[name, email, city, id]);
     }catch(err){
@@ -57,11 +68,11 @@ export const updateSubscriber = async (name, email, city,id) =>{
     }
 }
 
-export const getSubscriberId = async (email)=>{
-    const query="SELECT s.id FROM subscriber as s WHERE s.email=?;";
+export const getSubscriberById = async (id)=>{
+    const query = "SELECT * FROM subscriber as s WHERE s.id = ?;"
     try{
-        const [id] = await db.query(query,[email]);
-        return id[0].id;
+        const [subscriber] = await db.query(query,[id]);
+        return subscriber[0];
     }catch(err){
         console.error(err.message);
         throw new Error("Database error!");
