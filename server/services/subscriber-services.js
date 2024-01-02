@@ -47,7 +47,7 @@ export const insertSubscriber = async (name, email, city) =>{
     }
 }
 
-export const deleteSubscriber = async (id) =>{
+export const deleteSubscriber = async (id) =>{ 
     const query = "DELETE FROM subscriber WHERE id = ?;"
 
     try{
@@ -56,7 +56,7 @@ export const deleteSubscriber = async (id) =>{
         console.error(err.message);
         throw new Error("Database error!");
     }
-}
+} 
 
 export const updateSubscriber = async (name, email, city, id) =>{
     const query ="UPDATE subscriber as s SET s.name=?, s.email=?, s.city=? WHERE s.id=?;"

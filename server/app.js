@@ -1,7 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import subscriberRouter from "./routes/subscriber-routes.js";
-import newspaperRouter  from "./routes/newspaper-routes.js"
+import newspaperRouter  from "./routes/newspaper-routes.js";
+import subscriptionRouter from "./routes/subscription-routes.js";
 import { errorHandler } from "./helpers/errorHandler.js";
 import cors from 'cors'
 dotenv.config();
@@ -12,6 +13,7 @@ app.use(cors());
 
 app.use('/subscriber',subscriberRouter);
 app.use('/newspaper',newspaperRouter);
+app.use('/subscription',subscriptionRouter);
 
 app.use(errorHandler);
 

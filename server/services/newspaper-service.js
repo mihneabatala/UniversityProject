@@ -22,7 +22,9 @@ export const getNewspaperData = async (name) => {
 
     try{
         const [newspaper] = await db.query(query,[name]);
-        newspaper[0].publication_date = newspaper[0].publication_date.toLocaleDateString();
+        if(newspaper[0] !== undefined){
+            newspaper[0].publication_date = newspaper[0].publication_date.toLocaleDateString();
+        }
         return newspaper[0];
     }catch (err){
         console.error(err.message);
@@ -46,7 +48,7 @@ export const getNewspaperById = async (id) =>{
     const query = "SELECT * FROM newspaper as n WHERE n.id = ?;"
 
     try{
-        const newspaper = await db.query(query,[id]);
+        const [newspaper] = await db.query(query,[id]);
         return newspaper[0];
     }catch (err) {
         console.error(err.message);
