@@ -1,7 +1,7 @@
 import  express  from "express";
 import { getNewspaperData} from "../services/newspaper-service.js";
 import { getSubscriberData} from "../services/subscriber-services.js";
-import { getAllSubscriptions, getSubscriptionData, insertSubscription } from "../services/subscription-service.js";
+import { deleteSubscription, getAllSubscriptions, getSubscriptionData, insertSubscription } from "../services/subscription-service.js";
 
 const router = express.Router();
 
@@ -31,7 +31,7 @@ router.post('/', async (req,res,next) => {
         
         const subscription = await getSubscriptionData(newspaperId,subscriberId);
         if(subscription !== undefined){
-            return res.status(400).json({message:"Subscription already bought!"})
+            return res.status(400).json({message:"Subscription already purchased!"})
         }
         await insertSubscription(newspaperId,subscriberId,type,price);
         const newSubscription = await getSubscriptionData(newspaperId,subscriberId);
@@ -43,6 +43,16 @@ router.post('/', async (req,res,next) => {
         return res.status(200).json(subscriptionData);
     }
     catch(err){
+        next(err);
+    }
+})
+
+router.delete('/:id', async(req, res, next) => {
+    const {id} = req.params;
+    try{
+        await deleteSubscription(id);
+        return res.status(200).json({message: 'Subscription deleted successfully!'});
+    }catch(err){
         next(err);
     }
 })

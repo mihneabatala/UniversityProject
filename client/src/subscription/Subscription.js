@@ -36,6 +36,16 @@ const Subscription = () => {
     }
 }
 
+const calculateEditedPrice = () =>{
+  switch (editedSubscription) {
+      case 'One week': return 5;
+      case 'One month': return 15;
+      case 'Six months': return 70;
+      case 'One year': return 115;
+      default: return 5;
+  }
+}
+
   const handleFormSubmit = (e) =>{
     e.preventDefault();
 
@@ -65,6 +75,21 @@ const Subscription = () => {
     }
   }
 
+  const handleDelete = async (id) => {
+    try{
+      const response = await axios.delete('/subscription/' + id);
+      const listItems = items.filter( (item) => {
+        return item.id !== id;
+      })
+      setItems(listItems);
+      alert(response.data.message);
+    }catch(err) {
+      console.log(err.message);
+      alert(err.message);
+    }
+    
+  }
+
   return (
     <>
     <h1 className='componentInfo'>Buy Subscription</h1>
@@ -81,9 +106,11 @@ const Subscription = () => {
       />
       <SubscriptionTable
         items={items}
-        setItems={setItems}
         editedSubscription={editedSubscription}
         setEditedSubscription={setEditedSubscription}
+        calculatePrice={calculatePrice}
+        calculateEditedPrice={calculateEditedPrice}
+        handleDelete={handleDelete}
         editing={editing}
       />
     </div>

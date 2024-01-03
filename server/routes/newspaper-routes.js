@@ -23,7 +23,7 @@ router.post('/', async (req,res,next) =>{
         await insertNewspaper(name,category);
         const newspaper = await getNewspaperData(name);
     
-        return res.status(200).json(newspaper);
+        return res.status(200).json(newspaper); 
     }
     catch(err){ 
         next(err);

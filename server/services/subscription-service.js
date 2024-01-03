@@ -14,7 +14,6 @@ export const getAllSubscriptions = async () =>{
             const date = subscriptions[i].start_date.toLocaleDateString();
             const newspaperName = await getNewspaperById(subscriptions[i].id_newspaper);
             const subscriberName = await getSubscriberById(subscriptions[i].id_subscriber);
-            console.log(newspaperName);
             const updatedSubscription = {
                 ...subscriptions[i],
                 start_date: date,
@@ -58,3 +57,29 @@ export const getSubscriptionData = async(newspaperId, subscriberId) => {
         throw new Error("Database error!");
     }
 } 
+
+export const getSubscriptionById = async(id) => {
+    const query = "SELECT * FROM subscription as s WHERE s.id =?;"
+
+    try{
+        const [subscription] = await db.query(query,[id]);
+        if(subscription[0] !== undefined){
+            subscription[0].start_date = subscription[0].start_date.toLocaleDateString();
+        }
+        return subscription[0];
+    }catch(err){
+        console.error(err); 
+        throw new Error("Database error!");
+    }
+}
+
+export const deleteSubscription = async(id) => {
+    const query = "DELETE FROM subscription as s WHERE s.id =?;"
+
+    try{
+        await db.query(query,[id]);
+    }catch(err){
+        console.error(err); 
+        throw new Error("Database error!");
+    }
+}

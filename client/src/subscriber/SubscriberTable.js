@@ -3,7 +3,7 @@ import React from 'react'
 const SubscriberTable = ({ items, handleEdit, handleDelete ,input4, input5, input6, setInput4, setInput5, setInput6, editing , handleUpdate, handleCancel }) => {
   return (
     <div className='table'>
-      <h2 className='tableTitle'>Newspaper Table</h2>
+      <h2 className='tableTitle'>Subscriber Table</h2>
       <table>
         <thead>
           <tr>
