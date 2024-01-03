@@ -54,7 +54,7 @@ const Newspaper = () => {
       })
       setItems(listItems);
       
-      alert(response.data[0].name + " was deleted! ")
+      alert(response.data.name + " was deleted! ")
     }catch(err) {
       console.log(err.message);
       alert(err.message);

@@ -83,3 +83,13 @@ export const deleteSubscription = async(id) => {
         throw new Error("Database error!");
     }
 }
+
+export const updateSubscription = async (type, price, id) => {
+    const query = "UPDATE subscription as s SET s.type = ?, s.price= ? WHERE s.id = ?;"
+    try{
+        await db.query(query,[type, price, id]);
+    }catch(err){
+        console.error(err); 
+        throw new Error("Database error!");
+    }
+}

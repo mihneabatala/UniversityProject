@@ -26,7 +26,7 @@ const SubscriptionTable = ({ items, calculateEditedPrice, editedSubscription, se
                   <td>{item.subscriberEmail}</td>
                   <td>{item.start_date}</td>
                   <td>
-                  <select id='subscription_type' value={editedSubscription} onChange={(e) => setEditedSubscription(e.target.value)}>
+                  <select id='subscription_type' className='editSelect' value={editedSubscription} onChange={(e) => setEditedSubscription(e.target.value)}>
                       <option value="One week">One week</option>
                       <option value="One month">One month</option>
                       <option value="Six months">Six months</option>
@@ -36,7 +36,7 @@ const SubscriptionTable = ({ items, calculateEditedPrice, editedSubscription, se
                   <td>{calculateEditedPrice()}$</td>
                   <td className='buttonCell'>
                     <button className='Button' style={{backgroundColor:"#95A78D"}} onClick={() => handleUpdate(item.id)}>Save</button> 
-                    <button className='Button' style={{backgroundColor:"#F87666"}} onClick={() => handleCancel(item.id)}>Cancel</button>
+                    <button className='Button' style={{backgroundColor:"#F87666"}} onClick={() => handleCancel()}>Cancel</button>
                   </td>
                 </tr>
                   ) : (

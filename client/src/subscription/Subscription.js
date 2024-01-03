@@ -9,8 +9,8 @@ const Subscription = () => {
   const [items, setItems] = useState([]);
   const [input1, setInput1] = useState('');
   const [input2, setInput2] = useState('');
-  const [subscriptionType, setSubscriptionType] = useState('');
-  const [editedSubscription, setEditedSubscription] = useState();
+  const [subscriptionType, setSubscriptionType] = useState('One week');
+  const [editedSubscription, setEditedSubscription] = useState('One week');
   const [editing,setEditing] = useState(false);
   
   useEffect(() => {
@@ -86,8 +86,50 @@ const calculateEditedPrice = () =>{
     }catch(err) {
       console.log(err.message);
       alert(err.message);
+    } 
+  }
+  
+  const handleEdit = (id) => {
+    setEditing(id);
+    setEditedSubscription('One week');
+  }
+
+  const handleUpdate = (id) => {
+    const editedItem = {
+      type: editedSubscription,
+      price: calculateEditedPrice()
+    }
+    updateItem(editedItem,id);
+    setEditing(false);
+  }
+
+  const updateItem = async(editedItem,id) => {
+    try{
+      const response = await axios.patch('/subscription/' + id, editedItem);
+      const updatedList = items.map( item =>{
+        if(item.id ===id){
+          return {
+            ...item,
+            type: response.data.type,
+            price: response.data.price
+          }
+        }
+        return item;
+      })
+    
+      setItems(updatedList);
+      alert("Subscription updated successfully!");
+
+    }catch(err){
+      console.log(err.message);
+      alert(err.message);
     }
     
+  }
+
+  const handleCancel = () => {
+    setEditing(false);
+    setEditedSubscription('One week');
   }
 
   return (
@@ -111,6 +153,9 @@ const calculateEditedPrice = () =>{
         calculatePrice={calculatePrice}
         calculateEditedPrice={calculateEditedPrice}
         handleDelete={handleDelete}
+        handleEdit={handleEdit}
+        handleCancel={handleCancel}
+        handleUpdate={handleUpdate}
         editing={editing}
       />
     </div>

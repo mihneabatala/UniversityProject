@@ -1,7 +1,7 @@
 import  express  from "express";
 import { getNewspaperData} from "../services/newspaper-service.js";
 import { getSubscriberData} from "../services/subscriber-services.js";
-import { deleteSubscription, getAllSubscriptions, getSubscriptionData, insertSubscription } from "../services/subscription-service.js";
+import { deleteSubscription, getAllSubscriptions, getSubscriptionById, getSubscriptionData, insertSubscription, updateSubscription } from "../services/subscription-service.js";
 
 const router = express.Router();
 
@@ -54,6 +54,19 @@ router.delete('/:id', async(req, res, next) => {
         return res.status(200).json({message: 'Subscription deleted successfully!'});
     }catch(err){
         next(err);
+    }
+})
+
+router.patch('/:id', async(req, res, next) => {
+    const {id} = req.params;
+    const {type, price} = req.body;
+
+    try{
+        await updateSubscription(type, price, id);
+        const editedSubscription = await getSubscriptionById(id);
+        return res.status(200).json(editedSubscription);
+    }catch(err){
+        next(err); 
     }
 })
 
