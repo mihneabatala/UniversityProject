@@ -30,10 +30,11 @@ html{
 }
 body{
   height: 100vh;
+  background-color: var(--color1);
 }
 #root{
-  height: 100%;
-  background-color: var(--color1);
+  height: auto;
+  
 }
 
 .title{
@@ -153,7 +154,6 @@ input{
   width: 1000px;
   height: 500px;
   background-color: var(--color3);
-  color: var(--vanilla);
   margin-left: 5rem;
   border-radius: 20px;
   overflow-x: auto;
@@ -235,4 +235,20 @@ select{
 
 .editSelect{
   width: 80%;
+}
+
+.homepageComponent{
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+}
+
+.homepageTables{
+  width: 30%;
+  height:220px;
+  margin: 1.5rem 2rem;
+  text-align: center;
 }

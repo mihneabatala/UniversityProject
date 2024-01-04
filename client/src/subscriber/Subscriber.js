@@ -28,7 +28,6 @@ const Subscriber = () => {
     fetchItems(); 
   },[])
 
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const item = {
@@ -36,7 +35,7 @@ const Subscriber = () => {
       email: input2,
       city: input3
     }
-    
+
     addItem(item);
 
     setInput1('');
@@ -129,7 +128,6 @@ const Subscriber = () => {
     setEditing(false);
   }
 
-  
   return (
     <>
     <h1 className='componentInfo'>Add Subscriber </h1>

@@ -20,11 +20,11 @@ router.post('/', async (req,res,next) => {
     try{
         const newspaperData = await getNewspaperData(newspaperName);
         if(newspaperData === undefined){
-            return res.status(400).json({message:"Newspaper doesn't exist!"})
+            return res.status(400).json({message:"Newspaper doesn't exist or misspelled!"})
         }
         const subscriberData = await getSubscriberData(subscriberEmail)
         if(subscriberData === undefined){
-            return res.status(400).json({message:"Subscriber doesn't exist!"})
+            return res.status(400).json({message:"Subscriber doesn't exist or misspelled!"})
         }
         const newspaperId = newspaperData.id;
         const subscriberId = subscriberData.id;
