@@ -15,11 +15,12 @@ const SubscriberTable = ({ items, handleEdit, handleDelete ,input4, input5, inpu
         </thead>
         <tbody>
           {
-            items.map( (item) => (
-              <React.Fragment key={item.id}>
-                {
-                  editing && editing === item.id ? (
-                    <tr>
+            items.map( (item) => {
+
+                 if(editing && editing === item.id) {
+
+                  return (
+                    <tr key={item.id}>
                   <td>
                     <input
                       type='text'
@@ -56,32 +57,33 @@ const SubscriberTable = ({ items, handleEdit, handleDelete ,input4, input5, inpu
                     <button className='Button' style={{backgroundColor:"#F87666"}} onClick={() => handleCancel(item.id)}>Cancel</button>
                   </td>
                 </tr>
-                  ) : (
-                    <tr>
-                  <td>{item.name}</td>
-                  <td>{item.email}</td>
-                  <td>{item.city}</td>
-                  <td className='buttonCell'>
-                    <button
-                      style={{ backgroundColor: '#BD897E' }}
-                      className='Button'
-                      onClick={() => handleEdit(item.id,item.name,item.email,item.city)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      style={{ backgroundColor: '#F87666' }}
-                      className='Button'
-                      onClick={() => handleDelete(item.id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
                   )
-                }
-              </React.Fragment>
-            ))
+                 } else  {
+                    return (
+                      <tr key={item.id}>
+                      <td>{item.name}</td>
+                      <td>{item.email}</td>
+                      <td>{item.city}</td>
+                      <td className='buttonCell'>
+                        <button
+                          style={{ backgroundColor: '#BD897E' }}
+                          className='Button'
+                          onClick={() => handleEdit(item.id,item.name,item.email,item.city)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          style={{ backgroundColor: '#F87666' }}
+                          className='Button'
+                          onClick={() => handleDelete(item.id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                    )
+                 }           
+            })
           }
         </tbody>
       </table>

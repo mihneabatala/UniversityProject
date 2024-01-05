@@ -17,11 +17,10 @@ const SubscriptionTable = ({ items, calculateEditedPrice, editedSubscription, se
         </thead>
         <tbody>
           {
-            items.map( (item) => (
-              <React.Fragment key={item.id}>
-                {
-                  editing && editing === item.id ? (
-                    <tr>
+            items.map( (item) => {
+              if(editing && editing === item.id){
+                return (
+                  <tr key={item.id}>
                   <td>{item.newspaperName}</td>
                   <td>{item.subscriberEmail}</td>
                   <td>{item.start_date}</td>
@@ -39,8 +38,10 @@ const SubscriptionTable = ({ items, calculateEditedPrice, editedSubscription, se
                     <button className='Button' style={{backgroundColor:"#F87666"}} onClick={() => handleCancel()}>Cancel</button>
                   </td>
                 </tr>
-                  ) : (
-                    <tr>
+                )
+              } else {
+                return (
+                  <tr key={item.id}>
                   <td>{item.newspaperName}</td>
                   <td>{item.subscriberEmail}</td>
                   <td>{item.start_date}</td>
@@ -63,10 +64,9 @@ const SubscriptionTable = ({ items, calculateEditedPrice, editedSubscription, se
                     </button>
                   </td>
                 </tr>
-                  )
-                }
-              </React.Fragment>
-            ))
+                )
+              }
+            })
           }
         </tbody>
       </table>

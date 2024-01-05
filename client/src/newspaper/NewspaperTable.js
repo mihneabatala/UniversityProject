@@ -15,11 +15,12 @@ const NewspaperTable = ({ items, handleEdit, handleDelete ,input3, input4, setIn
         </thead>
         <tbody>
           {
-            items.map( (item) => (
-              <React.Fragment key={item.id}>
-                {
-                  editing && editing === item.id ? (
-                    <tr>
+            items.map( (item) => {
+
+              if(editing && editing === item.id){
+
+                return (
+                  <tr  key={item.id}>
                   <td>
                     <input
                       type='text'
@@ -48,8 +49,12 @@ const NewspaperTable = ({ items, handleEdit, handleDelete ,input3, input4, setIn
                     <button className='Button' style={{backgroundColor:"#F87666"}} onClick={() => handleCancel(item.id)}>Cancel</button>
                   </td>
                 </tr>
-                  ) : (
-                    <tr>
+                )
+              } 
+                else {
+
+                  return (
+                    <tr key={item.id}>
                   <td>{item.name}</td>
                   <td>{item.category}</td>
                   <td>{item.publication_date}</td>
@@ -71,9 +76,9 @@ const NewspaperTable = ({ items, handleEdit, handleDelete ,input3, input4, setIn
                   </td>
                 </tr>
                   )
-                }
-              </React.Fragment>
-            ))
+              }
+
+            })
           }
         </tbody>
       </table>
