@@ -3,7 +3,7 @@ import React from 'react'
 const RevenueTable = ({revenue}) => {
   return (
     <div className='table homepageTables'>
-        <h2 className='tableTitle'>Most bought Newspapers</h2>
+        <h2 className='tableTitle'>Top Newspapers</h2>
         <table>
             <thead>
                 <tr>
