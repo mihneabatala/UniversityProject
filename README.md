@@ -16,6 +16,6 @@ This project involved the design of a database comprising three tables with a ma
 
 1. Import the database in MySQL.
 2. Change the host, user, password and database in the /server/database/database.js with your own.
-3. To run the React App go to client folder in terminal, after that type "npm start".
-4. To run the server go to server folder in another terminal, after that type "npm start".
+3. To run the React App go to client folder in terminal and type "npm start".
+4. To run the server go to server folder in another terminal and type "npm start".
 5. Feel free to change the project for your own needs!
