@@ -2,7 +2,7 @@ import React from 'react'
 
 const CategoryTable = ({category}) => {
     
-    const tableHeight = category.length * 70 ;
+    const tableHeight = category.length * 70;
 
   return (
     <div className='table homepageTables' style={{height: tableHeight}}>
