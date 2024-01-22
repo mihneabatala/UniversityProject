@@ -10,37 +10,37 @@ const Homepage = () => {
   const [revenue,setRevenue] =useState([]);
   const [category,setCategory] =useState([]);
 
+  const fetchSpenders = async () =>{
+    try{
+      const response = await axios.get('/homepage/spenders');
+      const listItems = response.data;
+      setSpenders(listItems)
+    }catch(err){
+      alert(err.message);
+    }
+  }
+
+  const fetchRevenue = async () => {
+    try{
+      const response = await axios.get('/homepage/revenue');
+      const listItems = response.data;
+      setRevenue(listItems);
+    }catch(err){
+      alert(err.message);
+    }
+  }
+
+  const fetchCategory = async () => {
+    try{
+      const response = await axios.get('/homepage/category');
+      const listItems = response.data;
+      setCategory(listItems);
+    }catch(err){
+      alert(err.message);
+    }
+  }
+
   useEffect(() => {
-    const fetchSpenders = async () =>{
-      try{
-        const response = await axios.get('/homepage/spenders');
-        const listItems = response.data;
-        setSpenders(listItems)
-      }catch(err){
-        alert(err.message);
-      }
-    }
-
-    const fetchRevenue = async () => {
-      try{
-        const response = await axios.get('/homepage/revenue');
-        const listItems = response.data;
-        setRevenue(listItems);
-      }catch(err){
-        alert(err.message);
-      }
-    }
-
-    const fetchCategory = async () => {
-      try{
-        const response = await axios.get('/homepage/category');
-        const listItems = response.data;
-        setCategory(listItems);
-      }catch(err){
-        alert(err.message);
-      }
-    }
-
     fetchCategory();
     fetchSpenders();
     fetchRevenue();

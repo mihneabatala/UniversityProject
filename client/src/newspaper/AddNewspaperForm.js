@@ -1,6 +1,21 @@
 import React from 'react'
+import { useState } from 'react';
 
-const AddNewspaper = ({ input1, input2, setInput1, setInput2, handleFormSubmit }) => {
+const AddNewspaper = ({ onFormSubmit }) => {
+
+  const [name, setName] = useState('');
+  const [category, setCategory] = useState('');
+
+  const handleFormSubmit = (e) =>{
+    e.preventDefault();
+    const item = {
+      name: name,
+      category: category
+    };
+    onFormSubmit(item);
+    setName('');
+    setCategory('');
+  }
 
   return (
     <form className = 'addForm' onSubmit={handleFormSubmit}>
@@ -12,8 +27,8 @@ const AddNewspaper = ({ input1, input2, setInput1, setInput2, handleFormSubmit }
           autoFocus
           required
           placeholder='Enter...'
-          value={input1}
-          onChange={(e) => setInput1(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div key={1} className='inputLabel'>
@@ -23,8 +38,8 @@ const AddNewspaper = ({ input1, input2, setInput1, setInput2, handleFormSubmit }
           id='newspaper_category'
           required
           placeholder='Enter...'
-          value={input2}
-          onChange={(e) => setInput2(e.target.value)}
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
         />
       </div>
       <button type="submit" className='formSubmit'>Submit</button>

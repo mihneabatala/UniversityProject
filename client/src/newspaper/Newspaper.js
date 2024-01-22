@@ -3,35 +3,25 @@ import NewspaperTable from './NewspaperTable.js'
 import axios from '../api/axios.js'
 import AddNewspaperForm from './AddNewspaperForm.js'
 const Newspaper = () => {
+
   const [items,setItems] = useState([]);
-  const [input1, setInput1] = useState('');
-  const [input2, setInput2] = useState('');
-  const [input3, setInput3] = useState('');
-  const [input4, setInput4] = useState('');
-  const [editing, setEditing] = useState(false);
+  
+  const fetchItems = async() => {
+    try{
+      const response= await axios.get('/newspaper');
+      const listItems = await response.data;
+      setItems(listItems);
+    }catch(err){
+      alert(err.message);
+    }
+  }
 
   useEffect(() => {
-    const fetchItems = async() => {
-      try{
-        const response= await axios.get('/newspaper');
-        const listItems = await response.data;
-        setItems(listItems);
-      }catch(err){
-        alert(err.message);
-      }
-    }
     fetchItems(); 
   },[])
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const item = {
-      name: input1,
-      category: input2
-    }
+  const handleFormSubmit = (item) => {
     addItem(item);
-    setInput1('');
-    setInput2('');
   }
 
   const addItem = async (item) => {
@@ -62,28 +52,8 @@ const Newspaper = () => {
     
   }
 
-  const handleEdit = (id,name,category) => {
-    setEditing(id);
-    setInput3(name);
-    setInput4(category);
-  }
-
-  const handleUpdate = (id) =>{
-    if(input3 !=='' && input4 !==''){
-      const editedItem = {
-        name: input3,
-        category: input4
-      }
+  const handleUpdate = (editedItem,id) =>{
       updateItem(editedItem,id);
-      setInput3('');
-      setInput4('');
-      setEditing(false);
-    }else{
-      setEditing(false);
-      setInput3('');
-      setInput4('');
-      alert("Please fill all input fields!")
-    }
   }
 
   const updateItem = async (newspaper,id) =>{
@@ -110,33 +80,18 @@ const Newspaper = () => {
     }
     
   }
-
-  const handleCancel = (e) =>{
-    setEditing(false);
-  }
   
   return (
     <>
     <h1 className='componentInfo'>Add Newspaper</h1>
     <div className='newspaperComponent'>
       <AddNewspaperForm
-       input1={input1}
-       input2={input2}
-       setInput1={setInput1}
-       setInput2={setInput2}
-       handleFormSubmit={handleFormSubmit}
+       onFormSubmit={handleFormSubmit}
       />
       <NewspaperTable
         items={items}
-        input3={input3}
-        input4={input4}
-        setInput3={setInput3}
-        setInput4={setInput4}
-        editing={editing}
-        handleEdit={handleEdit}
+        onUpdate={handleUpdate}
         handleDelete={handleDelete}
-        handleUpdate={handleUpdate}
-        handleCancel={handleCancel}
       />
       </div>
     </>

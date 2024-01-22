@@ -1,6 +1,40 @@
 import React from 'react';
+import { useState } from 'react';
 
-const NewspaperTable = ({ items, handleEdit, handleDelete ,input3, input4, setInput3, setInput4, editing , handleUpdate, handleCancel }) => {
+const NewspaperTable = ({ items, handleDelete , onUpdate }) => {
+
+  const [editedName, setEditedName] = useState('');
+  const [editedCategory, setEditedCategory] = useState('');
+  const [editing, setEditing] = useState(false);
+
+  const handleEdit = (id,name,category) => {
+    setEditing(id);
+    setEditedName(name);
+    setEditedCategory(category);
+  }
+  
+  const handleUpdate = (id) =>{
+    if(editedName !=='' && editedCategory !==''){
+      const editedItem = {
+        name: editedName,
+        category: editedCategory
+      }
+      onUpdate(editedItem,id);
+      setEditedName('');
+      setEditedCategory('');
+      setEditing(false);
+    }else{
+      setEditing(false);
+      setEditedName('');
+      setEditedCategory('');
+      alert("Please fill all input fields!")
+    }
+  }
+
+  const handleCancel = () =>{
+    setEditing(false);
+  }
+
   return (
     <div className='table'>
       <h2 className='tableTitle'>Newspaper Table</h2>
@@ -28,8 +62,8 @@ const NewspaperTable = ({ items, handleEdit, handleDelete ,input3, input4, setIn
                       required
                       id='newName'
                       placeholder={item.name}
-                      value={input3}
-                      onChange={(e) => setInput3(e.target.value)}
+                      value={editedName}
+                      onChange={(e) => setEditedName(e.target.value)}
                     />
                   </td>
                   <td>
@@ -39,8 +73,8 @@ const NewspaperTable = ({ items, handleEdit, handleDelete ,input3, input4, setIn
                       required
                       id='newCategory'
                       placeholder={item.category}
-                      value={input4}
-                      onChange={(e) => setInput4(e.target.value)}
+                      value={editedCategory}
+                      onChange={(e) => setEditedCategory(e.target.value)}
                     />
                   </td>
                   <td>{item.publication_date}</td>

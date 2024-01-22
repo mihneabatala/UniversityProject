@@ -13,16 +13,17 @@ const Subscription = () => {
   const [editedSubscription, setEditedSubscription] = useState('One week');
   const [editing,setEditing] = useState(false);
   
-  useEffect(() => {
-    const fetchItems = async() => {
-      try{
-        const response= await axios.get('/subscription');
-        const listItems = await response.data;
-        setItems(listItems);
-      }catch(err){
-        alert(err.message);
-      }
+  const fetchItems = async() => {
+    try{
+      const response= await axios.get('/subscription');
+      const listItems = await response.data;
+      setItems(listItems);
+    }catch(err){
+      alert(err.message);
     }
+  }
+
+  useEffect(() => {
     fetchItems(); 
   },[])
 

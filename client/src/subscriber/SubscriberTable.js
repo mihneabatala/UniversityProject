@@ -1,6 +1,47 @@
 import React from 'react'
+import { useState } from 'react';
 
-const SubscriberTable = ({ items, handleEdit, handleDelete ,input4, input5, input6, setInput4, setInput5, setInput6, editing , handleUpdate, handleCancel }) => {
+const SubscriberTable = ({ items, onUpdate, handleDelete }) => {
+
+  const [editedName, setEditedName] = useState('');
+  const [editedEmail, setEditedEmail] = useState('');
+  const [editedCity, setEditedCity] = useState('');
+  const [editing, setEditing] = useState(false);
+
+  const handleEdit = (id,name,email,city) => {
+    setEditing(id);
+    setEditedName(name);
+    setEditedEmail(email);
+    setEditedCity(city);
+  }
+
+  const handleUpdate = (id) =>{
+    if(editedName !== '' && editedEmail !== '' && editedCity !== ''){
+      const editedItem = {
+        name: editedName,
+        email: editedEmail,
+        city: editedCity
+      }
+      onUpdate(editedItem,id);
+
+      setEditedName('');
+      setEditedEmail('');
+      setEditedCity('');
+      setEditing(false);
+    }
+    else{
+      setEditing(false);
+      setEditedName('');
+      setEditedEmail('');
+      setEditedCity('');
+      alert("Please fill all input fields!")
+    }
+  }
+
+  const handleCancel = () =>{
+    setEditing(false);
+  }
+
   return (
     <div className='table'>
       <h2 className='tableTitle'>Subscriber Table</h2>
@@ -28,8 +69,8 @@ const SubscriberTable = ({ items, handleEdit, handleDelete ,input4, input5, inpu
                       id='newName'
                       autoFocus
                       placeholder={item.name}
-                      value={input4}
-                      onChange={(e) => setInput4(e.target.value)}
+                      value={editedName}
+                      onChange={(e) => setEditedName(e.target.value)}
                     />
                   </td>
                   <td>
@@ -38,8 +79,8 @@ const SubscriberTable = ({ items, handleEdit, handleDelete ,input4, input5, inpu
                       className='editInput'
                       id='newEmail'                     
                       placeholder={item.email}
-                      value={input5}
-                      onChange={(e) => setInput5(e.target.value)}
+                      value={editedEmail}
+                      onChange={(e) => setEditedEmail(e.target.value)}
                     />
                   </td>
                   <td>
@@ -48,8 +89,8 @@ const SubscriberTable = ({ items, handleEdit, handleDelete ,input4, input5, inpu
                       className='editInput'
                       id='newCity'
                       placeholder={item.city}
-                      value={input6}
-                      onChange={(e) => setInput6(e.target.value)}
+                      value={editedCity}
+                      onChange={(e) => setEditedCity(e.target.value)}
                     />
                   </td>
                   <td className='buttonCell'>

@@ -21,10 +21,5 @@ async function connectToDatabase() {
 }
 connectToDatabase();
 
-
-db.on('error', (err) => {
-    console.error('MySQL pool error:', err);
-});
-
 export default db;
 
