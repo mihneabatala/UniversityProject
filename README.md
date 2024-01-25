@@ -4,7 +4,7 @@ This project involved the design of a database comprising three tables with a ma
 
 # Purpose of the project
 
-## The main goal was to learn how to create a full-stack application
+## The main goal was to learn how to create an application that manages a database
 
 1. Learned how to design a database structure with multiple tables and establish relationships, particularly a many-to-many relationship.
 2. Gained experience in building a RESTful API to interact with the database. This included creating endpoints for handling various operations like data insertion, modification, deletion, and retrieval.
