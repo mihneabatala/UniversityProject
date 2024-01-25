@@ -18,7 +18,7 @@ const SpendersTable = ({spenders}) => {
                         <tr key={item.id}>
                             <td>{item.subscriber_name}</td>
                             <td>{item.subscription_count}</td>
-                            <td>{item.total_spending}</td>
+                            <td>{item.total_spending}$</td>
                         </tr>
                     ))
                 }

@@ -18,7 +18,7 @@ const RevenueTable = ({revenue}) => {
                         <tr key={item.id}>
                             <td>{item.newspaper_name}</td>
                             <td>{item.total_subscriptions}</td>
-                            <td>{item.total_revenue}</td>
+                            <td>{item.total_revenue}$</td>
                         </tr>
                     ))
                 }

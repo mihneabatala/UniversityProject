@@ -47,6 +47,8 @@ const Homepage = () => {
   },[])
 
   return (
+    <>
+    <h1 className='homepageTitle'>Interesting information</h1>
     <div className='homepageComponent'>
       <SpendersTable
         spenders={spenders}
@@ -58,7 +60,7 @@ const Homepage = () => {
         category={category}
       />
     </div>
-    
+    </>
   )
 }
 

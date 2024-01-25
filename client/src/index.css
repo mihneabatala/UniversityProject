@@ -239,6 +239,12 @@ select{
   width: 80%;
 }
 
+.homepageTitle{
+  color: var(--color5);
+  text-align: center;
+  margin-top: 1rem;
+}
+
 .homepageComponent{
   width: 100vw;
   display: flex;
@@ -285,5 +291,23 @@ select{
 @media (max-width:650px){
   html{
     font-size: 16px;
+  }
+}
+
+@media (max-width:580px){
+  html{
+    font-size: 11px;
+  }
+  .addForm{
+    height: 220px;
+  }
+  .navbar{
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width:400px){
+  html{
+    font-size: 8px;
   }
 }
