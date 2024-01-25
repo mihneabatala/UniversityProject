@@ -37,8 +37,8 @@ router.post('/', async (req,res,next) => {
         const newSubscription = await getSubscriptionData(newspaperId,subscriberId);
         const subscriptionData = {
             ...newSubscription,
-            newspaperName:newspaperName,
-            subscriberEmail:subscriberEmail
+            newspaperName:newspaperData.name,
+            subscriberEmail:subscriberData.email
         }
         return res.status(200).json(subscriptionData);
     }

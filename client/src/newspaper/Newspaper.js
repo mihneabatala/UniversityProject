@@ -20,9 +20,6 @@ const Newspaper = () => {
     fetchItems(); 
   },[])
 
-  const handleFormSubmit = (item) => {
-    addItem(item);
-  }
 
   const addItem = async (item) => {
     try{
@@ -50,10 +47,6 @@ const Newspaper = () => {
       alert(err.message);
     }
     
-  }
-
-  const handleUpdate = (editedItem,id) =>{
-      updateItem(editedItem,id);
   }
 
   const updateItem = async (newspaper,id) =>{
@@ -86,11 +79,11 @@ const Newspaper = () => {
     <h1 className='componentInfo'>Add Newspaper</h1>
     <div className='newspaperComponent'>
       <AddNewspaperForm
-       onFormSubmit={handleFormSubmit}
+       onFormSubmit={addItem}
       />
       <NewspaperTable
         items={items}
-        onUpdate={handleUpdate}
+        onUpdate={updateItem}
         handleDelete={handleDelete}
       />
       </div>

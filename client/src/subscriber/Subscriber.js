@@ -22,10 +22,6 @@ const Subscriber = () => {
     fetchItems(); 
   },[])
 
-  const handleFormSubmit = (subscriber) => {
-    addItem(subscriber);
-  }
-
   const addItem = async (item) => {
     try{
       const response = await axios.post('/subscriber',item);
@@ -51,12 +47,6 @@ const Subscriber = () => {
       alert(err.message);
     }
     
-  }
-
-  
-
-  const handleUpdate = (editedItem,id) =>{
-      updateItem(editedItem,id);
   }
 
   const updateItem = async (subscriber,id) =>{
@@ -91,12 +81,12 @@ const Subscriber = () => {
     <h1 className='componentInfo'>Add Subscriber </h1>
     <div className='newspaperComponent'>
     <AddSubscriberForm
-      onFormSubmit={handleFormSubmit}
+      onFormSubmit={addItem}
     />
     <SubscriberTable
       items={items}
       handleDelete={handleDelete}
-      onUpdate={handleUpdate}
+      onUpdate={updateItem}
     />
     </div>
     </>

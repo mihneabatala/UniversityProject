@@ -1,6 +1,30 @@
 import React from 'react'
+import { useState } from 'react';
 
-const SubscriptionTable = ({ items, calculateEditedPrice, editedSubscription, setEditedSubscription, handleEdit, handleDelete, editing , handleUpdate, handleCancel }) => {
+const SubscriptionTable = ({ items, onUpdate, handleDelete, calculatePrice }) => {
+
+  const [editedSubscription, setEditedSubscription] = useState('One week');
+  const [editing,setEditing] = useState(false);
+
+  const handleEdit = (id) => {
+    setEditing(id);
+    setEditedSubscription('One week');
+  }
+
+  const handleUpdate = (id) => {
+    const editedItem = {
+      type: editedSubscription,
+      price: calculatePrice(editedSubscription)
+    }
+    onUpdate(editedItem,id);
+    setEditing(false);
+  }
+
+  const handleCancel = () => {
+    setEditing(false);
+    setEditedSubscription('One week');
+  }
+
   return (
     <div className='table'>
       <h2 className='tableTitle'>Subscription Table</h2>
@@ -32,7 +56,7 @@ const SubscriptionTable = ({ items, calculateEditedPrice, editedSubscription, se
                       <option value="One year">One year</option>
                   </select>
                   </td>
-                  <td>{calculateEditedPrice()}$</td>
+                  <td>{calculatePrice(editedSubscription)}$</td>
                   <td className='buttonCell'>
                     <button className='Button' style={{backgroundColor:"#95A78D"}} onClick={() => handleUpdate(item.id)}>Save</button> 
                     <button className='Button' style={{backgroundColor:"#F87666"}} onClick={() => handleCancel()}>Cancel</button>

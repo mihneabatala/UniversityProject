@@ -8,6 +8,11 @@ const SubscriberTable = ({ items, onUpdate, handleDelete }) => {
   const [editedCity, setEditedCity] = useState('');
   const [editing, setEditing] = useState(false);
 
+  const emailValidation = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
   const handleEdit = (id,name,email,city) => {
     setEditing(id);
     setEditedName(name);
@@ -16,7 +21,15 @@ const SubscriberTable = ({ items, onUpdate, handleDelete }) => {
   }
 
   const handleUpdate = (id) =>{
-    if(editedName !== '' && editedEmail !== '' && editedCity !== ''){
+
+    if(emailValidation(editedEmail) !== true){
+      setEditing(false);
+      setEditedName('');
+      setEditedEmail('');
+      setEditedCity('');
+      alert("Enter a valid email address!")
+    }
+    else if(editedName !== '' && editedEmail !== '' && editedCity !== ''){
       const editedItem = {
         name: editedName,
         email: editedEmail,

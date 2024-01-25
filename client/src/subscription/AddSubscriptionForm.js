@@ -1,8 +1,30 @@
 import React from 'react'
+import { useState } from 'react';
 
-const AddSubscriptionForm = ({input1, input2 , subscriptionType, setInput1, setInput2, setSubscriptionType, handleFormSubmit, calculatePrice}) => {
+const AddSubscriptionForm = ({onFormSubmit, calculatePrice}) => {
 
-    
+  const [newspaperName, setNewspaperName] = useState('');
+  const [subscriberEmail, setSubscriberEmail] = useState('');
+  const [subscriptionType, setSubscriptionType] = useState('One week');
+
+  const handleFormSubmit = (e) =>{
+    e.preventDefault();
+
+    const price = calculatePrice(subscriptionType);
+
+    const subscription = {
+      newspaperName: newspaperName,
+      subscriberEmail: subscriberEmail,
+      type: subscriptionType,
+      price: price
+    }
+    onFormSubmit(subscription);
+
+    setNewspaperName('');
+    setSubscriberEmail('');
+    setSubscriptionType('One week');
+  }
+
 
   return (
     <form className = 'addForm subscriptionForm' onSubmit={handleFormSubmit}>
@@ -14,8 +36,8 @@ const AddSubscriptionForm = ({input1, input2 , subscriptionType, setInput1, setI
           autoFocus
           required
           placeholder='Enter...'
-          value={input1}
-          onChange={(e) => setInput1(e.target.value)}
+          value={newspaperName}
+          onChange={(e) => setNewspaperName(e.target.value)}
         />
       </div>
       <div key={1} className='inputLabel'>
@@ -25,8 +47,8 @@ const AddSubscriptionForm = ({input1, input2 , subscriptionType, setInput1, setI
           id='subscriber_email'
           required
           placeholder='Enter...'
-          value={input2}
-          onChange={(e) => setInput2(e.target.value)}
+          value={subscriberEmail}
+          onChange={(e) => setSubscriberEmail(e.target.value)}
         />
       </div>
       <div key={2} className='selectLabel'>
@@ -40,7 +62,7 @@ const AddSubscriptionForm = ({input1, input2 , subscriptionType, setInput1, setI
       </div>
       <div key={3} className='priceLabel'>
         <label className='price'>Price:</label>
-        <p className='priceTag'>{calculatePrice()}$</p>
+        <p className='priceTag'>{calculatePrice(subscriptionType)}$</p>
       </div>
       <button type="submit" className='formSubmit'>Submit</button>
     </form>
