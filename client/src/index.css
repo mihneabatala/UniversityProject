@@ -55,6 +55,8 @@ hr{
   border-bottom: 2px solid var(--color4);
 }
 
+  /* Navbar */
+
 .navbar{
   height: 70px;
   font-size: var(--m);
@@ -82,7 +84,7 @@ li:hover a{
   color: var(--color5);
 
 }
-
+ /* Add form component */
 .addForm{
   width: 400px;
   height: 300px;
@@ -108,6 +110,11 @@ label{
 .inputLabel{
   display: flex;
   flex-direction: column;
+}
+
+.priceLabel{
+  display: flex;
+  align-items: center;
 }
 
 input{
@@ -144,6 +151,8 @@ input{
 .formSubmit:hover {
   background-color: var(--color4);
 }
+
+  /* Table Component */
 
 .newspaperComponent{
   display: flex;
@@ -215,14 +224,13 @@ select{
   font-size: var(--s);
 }
 
-.priceLabel{
-  display: flex;
-  align-items: center;
-}
+
 
 .subscriptionForm{
   height: 420px;
 }
+
+/* Homepage component */
 
 .priceTag{
   font-weight: 600;
@@ -260,6 +268,8 @@ select{
   margin: 1.5rem 2rem;
   text-align: center;
 }
+
+/* Responsive */
 
 @media (max-width:1700px){
   .newspaperComponent{
